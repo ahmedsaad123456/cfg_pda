@@ -135,13 +135,11 @@ class Problem2CFG {
 
 
         ArrayList<Character> terminals = new ArrayList<Character>(Arrays.asList('a','b'));
-        ArrayList<Character> nonTerminals = new ArrayList<Character>(Arrays.asList('S','T'));
+        ArrayList<Character> nonTerminals = new ArrayList<Character>(Arrays.asList('S'));
         Character startSymbol = 'S';
         Map<Character,ArrayList<String>> productionRules = new HashMap<Character,ArrayList<String>>();
-        ArrayList<String> production_S = new ArrayList<>(Arrays.asList("T", "ε"));
-        ArrayList<String> production_t = new ArrayList<>(Arrays.asList("abTab", "Tbbaa","ab"));
+        ArrayList<String> production_S = new ArrayList<>(Arrays.asList("aSbSbS", "bSaSbS","bSbSaS","ε"));
         productionRules.put('S', production_S);
-        productionRules.put('T', production_t);
 
 
         CFGClass cfg = new CFGClass(terminals,nonTerminals,startSymbol,productionRules);
