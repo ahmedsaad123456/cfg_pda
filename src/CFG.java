@@ -155,15 +155,18 @@ class Problem3CFG {
         bw.write("3");
         bw.newLine();
 
-        ArrayList<Character> terminals = new ArrayList<Character>(Arrays.asList('a','b'));
-        ArrayList<Character> nonTerminals = new ArrayList<Character>(Arrays.asList('S','T'));
+        ArrayList<Character> terminals = new ArrayList<Character>(Arrays.asList('a', 'b'));
+        ArrayList<Character> nonTerminals = new ArrayList<Character>(Arrays.asList('S', 'A'));
         Character startSymbol = 'S';
-        Map<Character,ArrayList<String>> productionRules = new HashMap<Character,ArrayList<String>>();
-        ArrayList<String> production_S = new ArrayList<>(Arrays.asList("T", "ε"));
-        ArrayList<String> production_t = new ArrayList<>(Arrays.asList("abTab", "Tbbaa","ab"));
+        Map<Character, ArrayList<String>> productionRules = new HashMap<Character, ArrayList<String>>();
+        
+        ArrayList<String> production_S = new ArrayList<>(Arrays.asList("aSa", "bSb","aAb","bAa"));
+        ArrayList<String> production_A = new ArrayList<>(Arrays.asList("aA", "bA","ε"));
+        
         productionRules.put('S', production_S);
-        productionRules.put('T', production_t);
-        CFGClass cfg = new CFGClass(terminals,nonTerminals,startSymbol,productionRules);
+        productionRules.put('A', production_A);
+
+        CFGClass cfg = new CFGClass(terminals, nonTerminals, startSymbol, productionRules);
 
         cfg.solveProblem(br, bw);
     }
@@ -178,8 +181,8 @@ class Problem4CFG {
         ArrayList<Character> nonTerminals = new ArrayList<Character>(Arrays.asList('S','T'));
         Character startSymbol = 'S';
         Map<Character,ArrayList<String>> productionRules = new HashMap<Character,ArrayList<String>>();
-        ArrayList<String> production_S = new ArrayList<>(Arrays.asList("T", "ε"));
-        ArrayList<String> production_t = new ArrayList<>(Arrays.asList("abTab", "Tbbaa","ab"));
+        ArrayList<String> production_S = new ArrayList<>(Arrays.asList("aaS","aaaT"));
+        ArrayList<String> production_t = new ArrayList<>(Arrays.asList("bT", "ε"));
         productionRules.put('S', production_S);
         productionRules.put('T', production_t);
         CFGClass cfg = new CFGClass(terminals,nonTerminals,startSymbol,productionRules);
@@ -194,13 +197,11 @@ class Problem5CFG {
         bw.newLine();
 
         ArrayList<Character> terminals = new ArrayList<Character>(Arrays.asList('a','b'));
-        ArrayList<Character> nonTerminals = new ArrayList<Character>(Arrays.asList('S','T'));
+        ArrayList<Character> nonTerminals = new ArrayList<Character>(Arrays.asList('S'));
         Character startSymbol = 'S';
         Map<Character,ArrayList<String>> productionRules = new HashMap<Character,ArrayList<String>>();
-        ArrayList<String> production_S = new ArrayList<>(Arrays.asList("T", "ε"));
-        ArrayList<String> production_t = new ArrayList<>(Arrays.asList("abTab", "Tbbaa","ab"));
+        ArrayList<String> production_S = new ArrayList<>(Arrays.asList("aS","aSb","a"));
         productionRules.put('S', production_S);
-        productionRules.put('T', production_t);
         CFGClass cfg = new CFGClass(terminals,nonTerminals,startSymbol,productionRules);
 
         cfg.solveProblem(br, bw);
