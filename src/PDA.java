@@ -308,7 +308,7 @@ class Problem3PDA {
         bw.newLine();
 
         ArrayList<Integer> states = new ArrayList<Integer>(Arrays.asList(0,1,2 , 3));
-        ArrayList<Integer> finalStates = new ArrayList<Integer>(Arrays.asList(0 , 3));
+        ArrayList<Integer> finalStates = new ArrayList<Integer>(Arrays.asList(3));
         ArrayList<Character> inputAlphabet = new ArrayList<Character>(Arrays.asList('{','}'));
         ArrayList<Character> stackAlphabet = new ArrayList<Character>(Arrays.asList('$','{'));
         int startState = 0;
