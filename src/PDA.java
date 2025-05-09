@@ -165,6 +165,13 @@ class PDAClass {
         char inputChar = (inputIndex < input.length()) ? input.charAt(inputIndex) : 'ε';
         char stackTop = stack.isEmpty() ? 'ε' : stack.peek();
 
+        // if the char is space
+        if(inputChar == ' '){
+            inputIndex++;
+            return dfs(currentState, inputIndex, input, stack);
+        }
+
+
         // if the input character is 'ε' and the stack top is 'ε', we can skip this transition
         if(inputChar == 'ε' && stackTop == 'ε') {
             return false;
@@ -272,17 +279,24 @@ class Problem2PDA {
         bw.write("2");
         bw.newLine();
 
-        ArrayList<Integer> states = new ArrayList<Integer>(Arrays.asList(0,1,2));
-        ArrayList<Integer> finalStates = new ArrayList<Integer>(Arrays.asList(2));
+        ArrayList<Integer> states = new ArrayList<Integer>(Arrays.asList(0,1,2 , 3 , 4 , 5, 6 ,7));
+        ArrayList<Integer> finalStates = new ArrayList<Integer>(Arrays.asList(7));
         ArrayList<Character> inputAlphabet = new ArrayList<Character>(Arrays.asList('a','b'));
         ArrayList<Character> stackAlphabet = new ArrayList<Character>(Arrays.asList('$','a'));
         int startState = 0;
         Character stackInitial = '$';
         TransitionFunction transitionFunction = new TransitionFunction();
-        transitionFunction.addTransition(1,'ε','ε',2, "$");
-        TransitionFunction productionRules = new TransitionFunction();
-        // add the rest of transitions.
-        PDAClass pda = new PDAClass(states,inputAlphabet,stackAlphabet,productionRules,startState,finalStates,stackInitial);
+        transitionFunction.addTransition(0,'ε','ε',1, "$");
+        transitionFunction.addTransition(1,'a','ε',2, "ε");
+        transitionFunction.addTransition(2,'a','ε',3, "a");
+        transitionFunction.addTransition(3,'a','ε',4, "a");
+        transitionFunction.addTransition(4,'ε','ε',1, "ε");
+        transitionFunction.addTransition(4,'b','a',5, "ε");
+        transitionFunction.addTransition(5,'b','a',6, "ε");
+        transitionFunction.addTransition(6,'b','a',5, "ε");
+        transitionFunction.addTransition(6,'ε','$',7, "ε");
+
+        PDAClass pda = new PDAClass(states,inputAlphabet,stackAlphabet,transitionFunction,startState,finalStates,stackInitial);
 
         pda.solveProblem(br, bw);
     }
@@ -293,17 +307,21 @@ class Problem3PDA {
         bw.write("3");
         bw.newLine();
 
-        ArrayList<Integer> states = new ArrayList<Integer>(Arrays.asList(0,1,2));
-        ArrayList<Integer> finalStates = new ArrayList<Integer>(Arrays.asList(2));
-        ArrayList<Character> inputAlphabet = new ArrayList<Character>(Arrays.asList('a','b'));
-        ArrayList<Character> stackAlphabet = new ArrayList<Character>(Arrays.asList('$','a'));
+        ArrayList<Integer> states = new ArrayList<Integer>(Arrays.asList(0,1,2 , 3));
+        ArrayList<Integer> finalStates = new ArrayList<Integer>(Arrays.asList(0 , 3));
+        ArrayList<Character> inputAlphabet = new ArrayList<Character>(Arrays.asList('{','}'));
+        ArrayList<Character> stackAlphabet = new ArrayList<Character>(Arrays.asList('$','{'));
         int startState = 0;
         Character stackInitial = '$';
         TransitionFunction transitionFunction = new TransitionFunction();
-        transitionFunction.addTransition(1,'ε','ε',2, "$");
-        TransitionFunction productionRules = new TransitionFunction();
+        transitionFunction.addTransition(0,'ε','ε',1, "$");
+        transitionFunction.addTransition(1,'{','ε',2, "{");
+        transitionFunction.addTransition(2,'{','ε',2, "{");
+        transitionFunction.addTransition(2,'}','{',2, "ε");
+        transitionFunction.addTransition(2,'ε','$',3, "ε");
+
         // add the rest of transitions.
-        PDAClass pda = new PDAClass(states,inputAlphabet,stackAlphabet,productionRules,startState,finalStates,stackInitial);
+        PDAClass pda = new PDAClass(states,inputAlphabet,stackAlphabet,transitionFunction,startState,finalStates,stackInitial);
 
         pda.solveProblem(br, bw);
     }
@@ -314,17 +332,26 @@ class Problem4PDA {
         bw.write("4");
         bw.newLine();
 
-        ArrayList<Integer> states = new ArrayList<Integer>(Arrays.asList(0,1,2));
-        ArrayList<Integer> finalStates = new ArrayList<Integer>(Arrays.asList(2));
-        ArrayList<Character> inputAlphabet = new ArrayList<Character>(Arrays.asList('a','b'));
-        ArrayList<Character> stackAlphabet = new ArrayList<Character>(Arrays.asList('$','a'));
+        ArrayList<Integer> states = new ArrayList<Integer>(Arrays.asList(0,1,2 ,3 ,4 , 5 ,6));
+        ArrayList<Integer> finalStates = new ArrayList<Integer>(Arrays.asList(6));
+        ArrayList<Character> inputAlphabet = new ArrayList<Character>(Arrays.asList('a','b' , 'c'));
+        ArrayList<Character> stackAlphabet = new ArrayList<Character>(Arrays.asList('$','a' , 'b'));
         int startState = 0;
         Character stackInitial = '$';
         TransitionFunction transitionFunction = new TransitionFunction();
-        transitionFunction.addTransition(1,'ε','ε',2, "$");
-        TransitionFunction productionRules = new TransitionFunction();
+        transitionFunction.addTransition(0,'ε','ε',1, "$");
+        transitionFunction.addTransition(1,'a','ε',2, "a");
+        transitionFunction.addTransition(2,'a','ε',2, "a");
+        transitionFunction.addTransition(2,'b','a',3, "ε");
+        transitionFunction.addTransition(3,'b','a',3, "ε");
+        transitionFunction.addTransition(3,'b','ε',4, "b");
+        transitionFunction.addTransition(4,'b','ε',4, "b");
+        transitionFunction.addTransition(4,'c','b',5, "ε");
+        transitionFunction.addTransition(5,'c','b',5, "ε");
+        transitionFunction.addTransition(5,'ε','$',6, "ε");
+
         // add the rest of transitions.
-        PDAClass pda = new PDAClass(states,inputAlphabet,stackAlphabet,productionRules,startState,finalStates,stackInitial);
+        PDAClass pda = new PDAClass(states,inputAlphabet,stackAlphabet,transitionFunction,startState,finalStates,stackInitial);
 
         pda.solveProblem(br, bw);
     }
@@ -332,17 +359,30 @@ class Problem4PDA {
 
 class Problem5PDA {
     public Problem5PDA(BufferedReader br, BufferedWriter bw) throws IOException {
-        ArrayList<Integer> states = new ArrayList<Integer>(Arrays.asList(0,1,2));
-        ArrayList<Integer> finalStates = new ArrayList<Integer>(Arrays.asList(2));
-        ArrayList<Character> inputAlphabet = new ArrayList<Character>(Arrays.asList('a','b'));
-        ArrayList<Character> stackAlphabet = new ArrayList<Character>(Arrays.asList('$','a'));
+
+        bw.write("5");
+        bw.newLine();
+
+        ArrayList<Integer> states = new ArrayList<Integer>(Arrays.asList(0,1,2 ,3 ,4));
+        ArrayList<Integer> finalStates = new ArrayList<Integer>(Arrays.asList(0 , 4 , 5));
+        ArrayList<Character> inputAlphabet = new ArrayList<Character>(Arrays.asList('a','b' , 'c'));
+        ArrayList<Character> stackAlphabet = new ArrayList<Character>(Arrays.asList('$' , 'b'));
         int startState = 0;
         Character stackInitial = '$';
         TransitionFunction transitionFunction = new TransitionFunction();
-        transitionFunction.addTransition(1,'ε','ε',2, "$");
-        TransitionFunction productionRules = new TransitionFunction();
+        transitionFunction.addTransition(0,'ε','ε',1, "$");
+        transitionFunction.addTransition(1,'a','ε',2, "ε");
+        transitionFunction.addTransition(1,'b','ε',2, "b");
+        transitionFunction.addTransition(1,'a','ε',5, "ε");
+        transitionFunction.addTransition(2,'a','ε',2, "ε");
+        transitionFunction.addTransition(2,'b','ε',2, "b");
+        transitionFunction.addTransition(2,'c','b',3, "ε");
+        transitionFunction.addTransition(3,'c','b',3, "ε");
+        transitionFunction.addTransition(3,'ε','$',4, "ε");
+
         // add the rest of transitions.
-        PDAClass pda = new PDAClass(states,inputAlphabet,stackAlphabet,productionRules,startState,finalStates,stackInitial);
+        PDAClass pda = new PDAClass(states,inputAlphabet,stackAlphabet,transitionFunction,startState,finalStates,stackInitial);
+
         pda.solveProblem(br, bw);
 
     }

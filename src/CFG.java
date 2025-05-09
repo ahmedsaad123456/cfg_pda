@@ -179,10 +179,8 @@ class Problem4CFG {
         ArrayList<Character> nonTerminals = new ArrayList<Character>(Arrays.asList('S','T'));
         Character startSymbol = 'S';
         Map<Character,ArrayList<String>> productionRules = new HashMap<Character,ArrayList<String>>();
-        ArrayList<String> production_S = new ArrayList<>(Arrays.asList("aaS","aaaT"));
-        ArrayList<String> production_t = new ArrayList<>(Arrays.asList("bT", "ε"));
+        ArrayList<String> production_S = new ArrayList<>(Arrays.asList("aaSb","aaa"));
         productionRules.put('S', production_S);
-        productionRules.put('T', production_t);
         CFGClass cfg = new CFGClass(terminals,nonTerminals,startSymbol,productionRules);
 
         cfg.solveProblem(br, bw);
