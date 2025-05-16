@@ -363,8 +363,8 @@ class Problem5PDA {
         bw.write("5");
         bw.newLine();
 
-        ArrayList<Integer> states = new ArrayList<Integer>(Arrays.asList(0,1,2 ,3 ,4));
-        ArrayList<Integer> finalStates = new ArrayList<Integer>(Arrays.asList(0 , 4 , 5));
+        ArrayList<Integer> states = new ArrayList<Integer>(Arrays.asList(0,1,2 ,3 ,4 , 5));
+        ArrayList<Integer> finalStates = new ArrayList<Integer>(Arrays.asList(0 , 4));
         ArrayList<Character> inputAlphabet = new ArrayList<Character>(Arrays.asList('a','b' , 'c'));
         ArrayList<Character> stackAlphabet = new ArrayList<Character>(Arrays.asList('$' , 'b'));
         int startState = 0;
@@ -374,6 +374,8 @@ class Problem5PDA {
         transitionFunction.addTransition(1,'a','ε',2, "ε");
         transitionFunction.addTransition(1,'b','ε',2, "b");
         transitionFunction.addTransition(1,'a','ε',5, "ε");
+        transitionFunction.addTransition(5,'a','ε',5, "ε");
+        transitionFunction.addTransition(5,'ε','$',4, "ε");
         transitionFunction.addTransition(2,'a','ε',2, "ε");
         transitionFunction.addTransition(2,'b','ε',2, "b");
         transitionFunction.addTransition(2,'c','b',3, "ε");
