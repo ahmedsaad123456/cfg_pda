@@ -85,6 +85,7 @@ class CFGClass {
                         return true;
                     }
                 }
+                return false;
             }
         }
 
